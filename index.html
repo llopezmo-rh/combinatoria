@@ -104,35 +104,53 @@ function update_values()
 
 <style>
 
+
+
 body {
 	background-color: LightSkyBlue;
 }
 
-input {
-	background-color: white;
-	color: black;
-	/*border-style: solid;*/
-	/*border-width: 5px;*/
+#input-boxes {
+	position: absolute;
+	left:270px;
 }
 
-table {
+#input-boxes input {
+	width: 100px;
+	background: yellow;
+	position: absolute;
+	left:30px;
+}
+
+#input-boxes button {
+	margin: 10px;
+	padding: 5px;
+	position: relative;
+	left: 20px;
+}
+
+#output-table {
 	/*border-collapse: collapse;*/
 	border: 1px solid black;
 	font-family: Verdana,sans-serif;
+	position: absolute;
+	left: 50px;
+	top: 150px;
 }
 
-th {
+#output-table th {
 	padding: 15px;
 	background: #4CAF50;
 	color: black;
 }
 
-td {
+#output-table td {
 	padding: 15px;
 	background: white;
 	color: black;
 	text-align: center;
 }
+
 
 /*
 tr:nth-child(odd) {
@@ -142,13 +160,21 @@ tr:nth-child(odd) {
 
 
 
+
+
+
+
 </style>
 </head>
 
 <body>
 
-n: <input type="text" name="n" id="n" value="1" onchange="update_values()"> <br>
-r: <input type="text" name="r" id="r" value="1" onchange="update_values()">
+<p name="input-boxes" id="input-boxes">
+n:<input type="text" name="n" id="n" value="1" onchange="update_values()"><br>
+r:&nbsp;<input type="text" name="r" id="r" value="1" onchange="update_values()"><br>
+<button onclick="update_values()">Calculate</button>
+</p>
+
 
 <br><br>
 
@@ -170,7 +196,7 @@ Variations with repetition:
 -->
 
 <br><br><br>
-<table>
+<table name="output-table" id="output-table">
 	<tr>
 	<th></th>
 	<th>Combinations</th>
