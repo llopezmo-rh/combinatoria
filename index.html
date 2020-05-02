@@ -96,7 +96,7 @@ function update_values()
 	value = variations_with_repetition(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	document.getElementById("p").innerHTML = value;
+	document.getElementById("vr").innerHTML = value;
 	}
 
 
@@ -179,13 +179,13 @@ tr:nth-child(odd) {
 	<th>Permutations</th>
 	</tr>
 	<tr>
-	<th>With repetition</td>
+	<th>With repetition</th>
 	<td name="cr" id="cr">1</td>
 	<td name="vr" id="vr">1</td>
 	<td rowspan=2 name="p" id="p">1</td>
 	</tr>
 	<tr>
-	<th>Without repetition</td>
+	<th>Without repetition</th>
 	<td name="c" id="c">1</td>
 	<td name="v" id="v">1</td>
 	</tr>	
