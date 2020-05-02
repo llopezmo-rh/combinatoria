@@ -73,35 +73,30 @@ function update_values()
 		return;
 		}
 	// Permutations
-	var p = document.getElementById("p");
 	var value = permutations(n);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	p.value = value;
+	document.getElementById("p").innerHTML = value;
 	// Combinations
-	var c = document.getElementById("c");
 	value = combinations(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	c.value = value;
+	document.getElementById("c").innerHTML = value;
 	// Combinations with repetition
-	var cr = document.getElementById("cr");
 	value = combinations_with_repetition(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	cr.value = value;
+	document.getElementById("cr").innerHTML = value;
 	// Variations
-	var v = document.getElementById("v");
 	value = variations(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	v.value = value;
+	document.getElementById("v").innerHTML = value;
 	// Variations with repetition
-	var vr = document.getElementById("vr");
 	value = variations_with_repetition(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	vr.value = value;
+	document.getElementById("p").innerHTML = value;
 	}
 
 
@@ -126,33 +121,41 @@ input {
 }
 
 table {
-	border-collapse: collapse;
-	font-family: "Arial";
-	font-size: 30px;
-	border-radius: 100px;
+	/*border-collapse: collapse;*/
+	border: 1px solid black;
+	font-family: Verdana,sans-serif;
 }
 
-th, td {
-	border: 6px solid black;
+th {
+	padding: 15px;
+	background: #4CAF50;
+	color: black;
 }
+
+td {
+	padding: 15px;
+	background: white;
+	color: black;
+	text-align: center;
+}
+
+/*
+tr:nth-child(odd) {
+	background-color: #cccccc;
+}
+*/
 
 .top-cell {
-	border-top-style: none;
-	color: DarkOrange;
+
+	
 }
 
 .left-cell {
-	border-left-style: none;
-	text-align: left;
-	color: Khaki;
+
 }
 
 .bottom-cell {
-	border-bottom-style: none;
-}
-
-.empty-cell {
-	border: 0;
+	
 }
 
 
@@ -166,6 +169,7 @@ r: <input type="text" name="r" id="r" value="1" onchange="update_values()">
 
 <br><br>
 
+<!--
 Permutations: 
 <input type="text" class="output-box" name="p" id="p" value="1" readonly> <br>
 
@@ -180,25 +184,26 @@ Variations:
 
 Variations with repetition:
 <input type="text" class="output-box" name="vr" id="vr" value="1" readonly> <br>
+-->
 
 <br><br><br>
 <table>
 	<tr>
-	<td class="empty-cell"></td>
-	<th class="top-cell" scope="col">Combinations</th>
-	<th class="top-cell" scope="col">Variations</th>
-	<th class="top-cell" scope="col">Permutations</th>
+	<th></th>
+	<th>Combinations</th>
+	<th>Variations</th>
+	<th>Permutations</th>
 	</tr>
 	<tr>
-	<th class="left-cell" scope="row">With repetition</td>
-	<td></td>
-	<td></td>
-	<td class="bottom-cell" rowspan="2"></td>
+	<th>With repetition</td>
+	<td name="cr" id="cr">1</td>
+	<td name="vr" id="vr">1</td>
+	<td rowspan=2 name="p" id="p">1</td>
 	</tr>
 	<tr>
-	<th class="left-cell bottom-cell" scope="row">Without repetition</td>
-	<td class="bottom-cell"></td>
-	<td class="bottom-cell"></td>
+	<th>Without repetition</td>
+	<td name="c" id="c">1</td>
+	<td name="v" id="v">1</td>
 	</tr>	
 </table>
 
