@@ -110,19 +110,19 @@ body {
 	background-color: LightSkyBlue;
 }
 
-#input-boxes {
+#input-form {
 	position: absolute;
 	left:270px;
 }
 
-#input-boxes input {
+#input-form input {
 	width: 100px;
 	background: yellow;
 	position: absolute;
 	left:30px;
 }
 
-#input-boxes button {
+#input-form button {
 	margin: 10px;
 	padding: 5px;
 	position: relative;
@@ -167,7 +167,7 @@ tr:nth-child(odd) {
 
 <body>
 
-<p name="input-boxes" id="input-boxes">
+<p name="input-form" id="input-form">
 n:<input type="text" name="n" id="n" value="1" onchange="update_values()"><br>
 r:<input type="text" name="r" id="r" value="1" onchange="update_values()"><br>
 <button onclick="update_values()">Calculate</button>
