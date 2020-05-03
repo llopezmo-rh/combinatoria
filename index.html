@@ -73,62 +73,73 @@ function update_values()
 		return;
 		}
 	// Permutations
-	var p = document.getElementById("p");
 	var value = permutations(n);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	p.value = value;
+	document.getElementById("p").innerHTML = value;
 	// Combinations
-	var c = document.getElementById("c");
 	value = combinations(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	c.value = value;
+	document.getElementById("c").innerHTML = value;
 	// Combinations with repetition
-	var cr = document.getElementById("cr");
 	value = combinations_with_repetition(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	cr.value = value;
+	document.getElementById("cr").innerHTML = value;
 	// Variations
-	var v = document.getElementById("v");
 	value = variations(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	v.value = value;
+	document.getElementById("v").innerHTML = value;
 	// Variations with repetition
-	var vr = document.getElementById("vr");
 	value = variations_with_repetition(n, r);
 	if (value > max_number)
 		value = value.toExponential(digits);
-	vr.value = value;
+	document.getElementById("vr").innerHTML = value;
 	}
 
 
 </script>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
+
+
+
+
 
 <body>
 
-n: <input type="text" name="n" id="n" value="1" onchange="update_values()"> <br>
-r: <input type="text" name="r" id="r" value="1" onchange="update_values()">
+<div id="input-form">
+	<p id="n-text">n:</p>
+	<input type="text" name="n" id="n" value="1" onchange="update_values()"><br>
+	<p id="r-text">r:</p>
+	<input type="text" name="r" id="r" value="1" onchange="update_values()"><br>
+	<button onclick="update_values()">Calculate</button>
+</div>
 
-<br><br>
+<table name="output-table" id="output-table">
+	<tr>
+	<th></th>
+	<th>Combinations</th>
+	<th>Variations</th>
+	<th>Permutations</th>
+	</tr>
+	<tr>
+	<th>With repetition</th>
+	<td id="cr">1</td>
+	<td id="vr">1</td>
+	<td rowspan=2 id="p">1</td>
+	</tr>
+	<tr>
+	<th>Without repetition</th>
+	<td id="c">1</td>
+	<td id="v">1</td>
+	</tr>	
+</table>
 
-Permutations: 
-<input type="text" name="p" id="p" value="1" readonly> <br>
-
-Combinations:
-<input type="text" name="c" id="c" value="1" readonly> <br>
-
-Combinations with repetition:
-<input type="text" name="cr" id="cr" value="1" readonly> <br>
-
-Variations:
-<input type="text" name="v" id="v" value="1" readonly> <br>
-
-Variations with repetition:
-<input type="text" name="vr" id="vr" value="1" readonly> <br>
 
 </body>
 </html> 
