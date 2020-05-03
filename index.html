@@ -1,0 +1,134 @@
+<!--
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU Affero General Public License as
+	published by the Free Software Foundation, either version 3 of the
+	License, or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU Affero General Public License for more details.
+
+	You should have received a copy of the GNU Affero General Public License
+	along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<script>
+
+function factorial(n)
+	{
+	if (n <= 0)
+		return 1;
+	else
+		return n * factorial(n - 1);
+	}
+	
+function permutations(n)
+	{
+	return factorial(n);
+	}
+
+function combinations(n, r)
+	{
+	if (n < r)
+		return NaN;
+	return (factorial(n) / (factorial(r) * factorial(n - r)));
+	}
+	
+function combinations_with_repetition(n, r)
+	{
+	return (factorial(n + r - 1) / (factorial(r) * factorial (n - 1)));
+	}
+
+function variations(n, r)
+	{
+	if (n < r)
+		return NaN;
+	return (factorial(n) / factorial(n - r));
+	}
+	
+function variations_with_repetition(n, r)
+	{
+	return Math.pow(n, r);
+	}
+
+function update_values()
+	{
+	var digits = 2;
+	var max_number = 1000000;
+	var n = parseInt(document.getElementById("n").value);
+	var r = parseInt(document.getElementById("r").value);
+	if (Number(n) != n || n % 1 != 0 || n < 1)
+		{
+		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
+		return;
+		}
+	if (Number(r) != r || r % 1 != 0 || r < 1)
+		{
+		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
+		return;
+		}
+	// Permutations
+	var p = document.getElementById("p");
+	var value = permutations(n);
+	if (value > max_number)
+		value = value.toExponential(digits);
+	p.value = value;
+	// Combinations
+	var c = document.getElementById("c");
+	value = combinations(n, r);
+	if (value > max_number)
+		value = value.toExponential(digits);
+	c.value = value;
+	// Combinations with repetition
+	var cr = document.getElementById("cr");
+	value = combinations_with_repetition(n, r);
+	if (value > max_number)
+		value = value.toExponential(digits);
+	cr.value = value;
+	// Variations
+	var v = document.getElementById("v");
+	value = variations(n, r);
+	if (value > max_number)
+		value = value.toExponential(digits);
+	v.value = value;
+	// Variations with repetition
+	var vr = document.getElementById("vr");
+	value = variations_with_repetition(n, r);
+	if (value > max_number)
+		value = value.toExponential(digits);
+	vr.value = value;
+	}
+
+
+</script>
+</head>
+
+<body>
+
+n: <input type="text" name="n" id="n" value="1" onchange="update_values()"> <br>
+r: <input type="text" name="r" id="r" value="1" onchange="update_values()">
+
+<br><br>
+
+Permutations: 
+<input type="text" name="p" id="p" value="1" readonly> <br>
+
+Combinations:
+<input type="text" name="c" id="c" value="1" readonly> <br>
+
+Combinations with repetition:
+<input type="text" name="cr" id="cr" value="1" readonly> <br>
+
+Variations:
+<input type="text" name="v" id="v" value="1" readonly> <br>
+
+Variations with repetition:
+<input type="text" name="vr" id="vr" value="1" readonly> <br>
+
+</body>
+</html> 
