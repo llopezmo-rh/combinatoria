@@ -38,19 +38,19 @@ function combinations(n, r)
 	{
 	if (n < r)
 		return NaN;
-	return (Math.round(factorial(n) / (factorial(r) * factorial(n - r))));
+	return Math.round(factorial(n) / (factorial(r) * factorial(n - r)));
 	}
 	
 function combinations_with_repetition(n, r)
 	{
-	return (Math.round(factorial(n + r - 1) / (factorial(r) * factorial (n - 1))));
+	return Math.round(factorial(n + r - 1) / (factorial(r) * factorial (n - 1)));
 	}
 
 function variations(n, r)
 	{
 	if (n < r)
 		return NaN;
-	return (Math.round(factorial(n) / factorial(n - r)));
+	return Math.round(factorial(n) / factorial(n - r));
 	}
 	
 function variations_with_repetition(n, r)
