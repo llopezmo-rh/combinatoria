@@ -62,14 +62,14 @@ function update_values()
 	{
 	var exponential_decimals = 2;
 	var max_number = 1000000;
-	var n = parseInt(document.getElementById("n").value);
-	var r = parseInt(document.getElementById("r").value);
-	if (Number(n) != n || n % 1 != 0 || n < 1)
+	var n = Number(document.getElementById("n").value);
+	var r = Number(document.getElementById("r").value);
+	if (! Number.isInteger(n) || n < 1)
 		{
 		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
 		return;
 		}
-	if (Number(r) != r || r % 1 != 0 || r < 1)
+	if (! Number.isInteger(r) || r < 1)
 		{
 		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
 		return;
