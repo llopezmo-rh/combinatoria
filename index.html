@@ -120,21 +120,20 @@ function update_values()
 <body>
 
 <div id="input-form">
+	<form id="settings" autocomplete="off">
+		Output format:<br>
+		<select id="select-format" name="select-format" onchange="format = this.value; update_values()">
+			<option value="auto">Auto</option>
+			<option value="exponential">Exponential</option>
+			<option value="integer">Integer</option>	
+		</select>
+	</form>
 	<p id="n-text">n:</p>
 	<input type="text" name="n" id="n" value="1" onchange="update_values()"><br>
 	<p id="r-text">r:</p>
 	<input type="text" name="r" id="r" value="1" onchange="update_values()"><br>
 	<button onclick="update_values()">Calculate</button>
 </div>
-
-<form id="settings" autocomplete="off">
-	Output format:<br>
-	<select id="select-format" name="select-format" onchange="format = this.value; update_values()">
-		<option value="auto">Auto</option>
-		<option value="exponential">Exponential</option>
-		<option value="integer">Integer</option>	
-	</select>
-</form>
 
 <table id="output-table">
 	<tr>
