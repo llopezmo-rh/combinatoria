@@ -24,14 +24,45 @@ body {
 	left:265px;
 	background: #4CAF50;
 	width: 235px;
-	height: 190px;
+	height: 235px;
 	border-radius:50px;
+	font-family: Verdana,sans-serif;
+}
+
+#input-form select {
+	width: 123px;
 }
 
 #input-form p {
 	font-family: Verdana,sans-serif;
 	font-weight: bold;
 	font-size: 23px;
+}
+
+#input-form input {
+	width: 100px;
+	position: relative;
+	left:48px;
+	/*box-sizing: border-box;*/
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: white;
+	padding: 12px 20px 12px 40px;
+}
+
+#input-form button {
+	margin: 10px;
+	padding: 5px;
+	position: relative;
+	left: 40px;
+	top: -110px;
+}
+
+#settings {
+	position: relative;
+	top: 15px;
+	left: 48px;
 }
 
 #n-text {
@@ -56,33 +87,13 @@ body {
 	top: -109px;
 }
 
-#input-form input {
-	width: 100px;
-	position: relative;
-	left:48px;
-	/*box-sizing: border-box;*/
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
-	background-color: white;
-	padding: 12px 20px 12px 40px;
-}
-
-#input-form button {
-	margin: 10px;
-	padding: 5px;
-	position: relative;
-	left: 40px;
-	top: -110px;
-}
-
 #output-table {
 	/*border-collapse: collapse;*/
 	border: 1px solid black;
 	font-family: Verdana,sans-serif;
 	position: absolute;
 	left: 50px;
-	top: 260px;
+	top: 300px;
 	border-radius: 4px;
 }
 
