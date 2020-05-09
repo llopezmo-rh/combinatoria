@@ -76,6 +76,7 @@ function format_integer(integer)
 
 function update_values()
 	{
+	var value;
 	var n = Number(document.getElementById("n").value);
 	var r = Number(document.getElementById("r").value);
 	if (! Number.isInteger(n) || n < 1)
@@ -89,7 +90,7 @@ function update_values()
 		return;
 		}
 	// Permutations
-	var value = permutations(n);
+	value = permutations(n);
 	document.getElementById("p").innerHTML = format_integer(value);
 	// Combinations
 	value = combinations(n, r);
