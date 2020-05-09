@@ -21,6 +21,12 @@
 <head>
 <script>
 
+// Default format
+var format = "auto";
+// Maximum number to be represented in integer format when format "auto" is selected
+const max_integer = 1000000;
+const exponential_decimals = 2;
+
 function factorial(n)
 	{
 	if (n < 0)
@@ -59,11 +65,17 @@ function variations_with_repetition(n, r)
 	{
 	return Math.pow(n, r);
 	}
+	
+function format_integer(integer)
+	{
+	if ((format != "integer" && integer > max_integer) || format == "exponential")
+		return integer.toExponential(exponential_decimals);
+	else
+		return integer;
+	}
 
 function update_values()
 	{
-	var exponential_decimals = 2;
-	var max_number = 1000000;
 	var n = Number(document.getElementById("n").value);
 	var r = Number(document.getElementById("r").value);
 	if (! Number.isInteger(n) || n < 1)
@@ -78,29 +90,19 @@ function update_values()
 		}
 	// Permutations
 	var value = permutations(n);
-	if (value > max_number)
-		value = value.toExponential(exponential_decimals);
-	document.getElementById("p").innerHTML = value;
+	document.getElementById("p").innerHTML = format_integer(value);
 	// Combinations
 	value = combinations(n, r);
-	if (value > max_number)
-		value = value.toExponential(exponential_decimals);
-	document.getElementById("c").innerHTML = value;
+	document.getElementById("c").innerHTML = format_integer(value);
 	// Combinations with repetition
 	value = combinations_with_repetition(n, r);
-	if (value > max_number)
-		value = value.toExponential(exponential_decimals);
-	document.getElementById("cr").innerHTML = value;
+	document.getElementById("cr").innerHTML = format_integer(value);
 	// Variations
 	value = variations(n, r);
-	if (value > max_number)
-		value = value.toExponential(exponential_decimals);
-	document.getElementById("v").innerHTML = value;
+	document.getElementById("v").innerHTML = format_integer(value);
 	// Variations with repetition
 	value = variations_with_repetition(n, r);
-	if (value > max_number)
-		value = value.toExponential(exponential_decimals);
-	document.getElementById("vr").innerHTML = value;
+	document.getElementById("vr").innerHTML = format_integer(value);
 	}
 
 
@@ -124,6 +126,15 @@ function update_values()
 	<button onclick="update_values()">Calculate</button>
 </div>
 
+<form id="settings" autocomplete="off">
+	Output format:<br>
+	<select id="select-format" name="select-format" onchange="format = this.value; update_values()">
+		<option value="auto">Auto</option>
+		<option value="exponential">Exponential</option>
+		<option value="integer">Integer</option>	
+	</select>
+</form>
+
 <table name="output-table" id="output-table">
 	<tr>
 	<th></th>
@@ -133,15 +144,15 @@ function update_values()
 	</tr>
 	<tr>
 	<th>With repetition</th>
-	<td id="cr">1</td>
+	<td id="cr"></td>
 	<!--<td id="cr" onmouseover="this.style.background='#ccc';" onmouseout="this.style.background='white';">1</td>-->
-	<td id="vr">1</td>
-	<td rowspan=2 id="p">1</td>
+	<td id="vr"></td>
+	<td rowspan=2 id="p"></td>
 	</tr>
 	<tr>
 	<th>Without repetition</th>
-	<td id="c">1</td>
-	<td id="v">1</td>
+	<td id="c"></td>
+	<td id="v"></td>
 	</tr>	
 </table>
 
