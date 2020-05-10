@@ -30,7 +30,10 @@ const exponential_decimals = 2;
 function factorial(n)
 	{
 	if (n < 0)
+		{
+		console.log("Function factorial called with non-natural value: " + n.toString())
 		return NaN;
+		}
 	if (n == 0)
 		return 1;
 	else
@@ -73,6 +76,15 @@ function format_integer(integer)
 	else
 		return integer;
 	}
+	
+function clean_output_table() 
+	{
+	var id_array = ["p", "c", "v", "cr", "vr"];
+	id_array.forEach (id => 
+		{
+		document.getElementById(id).innerHTML = "";
+		});
+	}
 
 function update_values()
 	{
@@ -82,11 +94,13 @@ function update_values()
 	if (! Number.isInteger(n) || n < 1)
 		{
 		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
+		clean_output_table();
 		return;
 		}
 	if (! Number.isInteger(r) || r < 1)
 		{
 		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
+		clean_output_table();
 		return;
 		}
 	// Permutations
@@ -118,6 +132,11 @@ function update_values()
 
 
 <body>
+
+<div id="banner">
+	<img id="banner-icon" src="banner-image.png" alt="Calculator icon">
+	<div id="banner-title">Combinatory calculator</div>
+</div>
 
 <div id="input-form">
 	<form id="settings" autocomplete="off">

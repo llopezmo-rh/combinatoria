@@ -16,12 +16,45 @@
 
 body {
 	background-color: LightSkyBlue;
+	overflow: hidden;
+}
+
+#banner {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: #4CAF50;
+	width: 1140px;
+	height: 70px;
+	border-radius: 2px;	
+}
+
+#banner-icon {
+	position: relative;
+	top: 4px;
+	left: 45px;
+	width: 60px;
+}
+
+#banner-title {
+  margin: 0;
+  position: relative;
+	left: 115px;
+  top: -53px;
+	/*
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+	*/
+	font-family: Verdana,sans-serif;
+	font-size: 40px;
+	font-weight: bold;
+	color: #404040;
 }
 
 #input-form {
 	position: absolute;
-	top: 30px;
-	left:265px;
+	top: 140px;
+	left:40px;
 	background: #4CAF50;
 	width: 235px;
 	height: 235px;
@@ -89,12 +122,13 @@ body {
 
 #output-table {
 	/*border-collapse: collapse;*/
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	border: 27px solid #4CAF50;
 	font-family: Verdana,sans-serif;
 	position: absolute;
-	left: 50px;
-	top: 300px;
-	border-radius: 4px;
+	left: 295px;
+	top: 156px;
+	border-radius: 30px;
 }
 
 #output-table th {
