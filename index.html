@@ -19,20 +19,22 @@
 <html>
 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 
 // Default format
 var format = "auto";
-// Maximum number to be represented in integer format when format "auto" is selected
-const max_integer = 1000000;
 const exponential_decimals = 2;
 
 function factorial(n)
 	{
+	var error_message;
 	if (n < 0)
 		{
-		console.log("Function factorial called with non-natural value: " + n.toString())
-		return NaN;
+		error_message = "Function factorial called with non-natural value: " + n.toString();
+		alert(error_message);
+		throw new Error(error_message);
+		//return NaN;
 		}
 	if (n == 0)
 		return 1;
@@ -68,13 +70,34 @@ function variations_with_repetition(n, r)
 	{
 	return Math.pow(n, r);
 	}
-	
-function format_integer(integer)
+
+// To be deleted if format_integer does not create any problem	
+function format_integer_old(integer)
 	{
 	if ((format != "integer" && integer > max_integer) || format == "exponential")
 		return integer.toExponential(exponential_decimals);
 	else
 		return integer;
+	}
+	
+function format_integer(integer)
+	{
+	var count, position, result, integer_string;
+	if (format == "exponential" || integer >= 1e21)
+		result = integer.toExponential(exponential_decimals).toString();
+	else
+		{
+		result = "";
+		integer_string = integer.toString();
+		for (count = 0, position = integer_string.length - 1; position >= 0; count++, position--) 
+			{
+			if (count != 0 && count%3 == 0)
+				result = " " + result;
+			result = integer_string.charAt(position) + result;
+			}
+		}
+	//console.log("integer " + integer + " result " + result);
+	return result;
 	}
 	
 function clean_output_table() 
@@ -91,13 +114,7 @@ function update_values()
 	var value;
 	var n = Number(document.getElementById("n").value);
 	var r = Number(document.getElementById("r").value);
-	if (! Number.isInteger(n) || n < 1)
-		{
-		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
-		clean_output_table();
-		return;
-		}
-	if (! Number.isInteger(r) || r < 1)
+	if (! Number.isInteger(n) || n < 1 || ! Number.isInteger(r) || r < 1)
 		{
 		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
 		clean_output_table();
@@ -144,7 +161,6 @@ function update_values()
 		<select id="select-format" name="select-format" onchange="format = this.value; update_values()">
 			<option value="auto">Auto</option>
 			<option value="exponential">Exponential</option>
-			<option value="integer">Integer</option>	
 		</select>
 	</form>
 	<p id="n-text">n:</p>
