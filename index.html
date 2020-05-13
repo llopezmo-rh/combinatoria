@@ -31,7 +31,8 @@ function factorial(n)
 	var error_message;
 	if (n < 0)
 		{
-		error_message = "Function factorial called with non-natural value: " + n.toString();
+		clean_output_table();
+		error_message = "Function factorial called with non-natural argument: " + n.toString();
 		alert(error_message);
 		throw new Error(error_message);
 		//return NaN;
@@ -91,7 +92,7 @@ function format_integer(integer)
 		integer_string = integer.toString();
 		for (count = 0, position = integer_string.length - 1; position >= 0; count++, position--) 
 			{
-			if (count != 0 && count%3 == 0)
+			if (count != 0 && count % 3 == 0)
 				result = " " + result;
 			result = integer_string.charAt(position) + result;
 			}
