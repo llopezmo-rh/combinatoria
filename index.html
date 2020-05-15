@@ -33,9 +33,9 @@ function factorial(n)
 		{
 		clean_output_table();
 		error_message = "Function factorial called with non-natural argument: " + n.toString();
-		alert(error_message);
 		throw new Error(error_message);
-		//return NaN;
+		alert(error_message);
+		return NaN;
 		}
 	if (n == 0)
 		return 1;
@@ -164,11 +164,11 @@ function update_values()
 			<option value="exponential">Exponential</option>
 		</select>
 	</form>
-	<p id="n-text">n:</p>
+	<label for="n" id="n-label">n:</label>
 	<input type="text" name="n" id="n" value="1" onchange="update_values()"><br>
-	<p id="r-text">r:</p>
+	<label for="r" id="r-label">r:</label>
 	<input type="text" name="r" id="r" value="1" onchange="update_values()"><br>
-	<button onclick="update_values()">Calculate</button>
+	<input type="button" value="Calculate" onclick="update_values()">
 </div>
 
 <table id="output-table">
