@@ -156,20 +156,18 @@ function update_values()
   <div id="banner-title">Combinatory calculator</div>
 </div>
 
-<div id="input-form">
-  <form id="settings" autocomplete="off">
-    Output format:<br>
-    <select id="select-format" name="select-format" onchange="format = this.value; update_values()">
-      <option value="auto">Auto</option>
-      <option value="exponential">Exponential</option>
-    </select>
-  </form>
+<form id="input-form" autocomplete="off">
+<label id="select-format-label" for="select-format">Output format:</label>
+<select id="select-format" name="select-format" onchange="format = this.value; update_values()">
+  <option value="auto">Auto</option>
+  <option value="exponential">Exponential</option>
+</select>
   <label for="n" id="n-label">n:</label>
   <input type="text" name="n" id="n" value="1" onchange="update_values()"><br>
   <label for="r" id="r-label">r:</label>
   <input type="text" name="r" id="r" value="1" onchange="update_values()"><br>
-  <input type="button" value="Calculate" onclick="update_values()">
-</div>
+  <input type="button" id="calculate_button" value="Calculate">
+</form>
 
 <table id="output-table">
   <tr>

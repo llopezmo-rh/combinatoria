@@ -61,13 +61,17 @@ body {
   border-radius:50px;
 }
 
-#input-form select {
-  width: 123px;
+#select-format-label {
+  position: relative;
+  top: 15px;
+  left: 48px;
 }
 
-#input-form label {
-  font-weight: bold;
-  font-size: 23px;
+#select-format {
+  position: relative;
+  top: 12px;
+  left: 48px;
+  width: 123px;
 }
 
 #input-form input[type=text] {
@@ -97,20 +101,24 @@ body {
 
 #n-label {
   position: relative;
-  top: 30px;
-  left: 16px;
+  top: 67px;
+  left: -110px;
+  font-weight: bold;
+  font-size: 23px;
 }
 
 #n {
   position: relative;
   top: 27px;
-  left: 17px;
+  left: 47px;
 }
 
 #r-label {
   position: relative;
-  top: 32px;
-  left: 20px;
+  top: 33px;
+  left: 22px;
+  font-weight: bold;
+  font-size: 23px;
 }
 
 #r {
