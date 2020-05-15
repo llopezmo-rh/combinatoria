@@ -43,7 +43,7 @@ function factorial(n)
     var error_message;
     if (n < 0)
         {
-        clean_output_table();
+        clean();
         error_message = "Function factorial called with non-natural argument: " + n.toString();
         alert(error_message);
         throw new Error(error_message);
@@ -113,12 +113,17 @@ function format_integer(integer)
     return result;
     }
     
-function clean_output_table() 
+function clean() 
     {
     var id_array = ["p", "c", "v", "cr", "vr"];
-    id_array.forEach (id => 
+    id_array.forEach(id => 
         {
         document.getElementById(id).innerHTML = "";
+        });
+    id_array = ["n", "r"];
+    id_array.forEach(id => 
+        {
+        document.getElementById(id).value = "";
         });
     }
 
@@ -130,7 +135,7 @@ function update_values()
     if (! Number.isInteger(n) || n < 1 || ! Number.isInteger(r) || r < 1)
         {
         alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
-        clean_output_table();
+        clean();
         return;
         }
     // Permutations
