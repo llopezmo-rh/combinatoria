@@ -40,22 +40,22 @@ var format = "auto";
 const EXPONENTIAL_DECIMALS = 2;
 // Highest number to be shown as integer with format "auto"
 const MAXINT = 1e21;
-
+ 
 function factorial(n)
     {
-    var error_message;
+    var i, result;
     if (n < 0)
         {
-        clean();
-        error_message = "Function factorial called with non-natural argument: " + n.toString();
+        var error_message = "Function factorial called with non-natural " + 
+            "argument: " + n.toString();
         alert(error_message);
         throw new Error(error_message);
         return NaN;
         }
-    if (n == 0)
-        return 1;
-    else
-        return n * factorial(n - 1);
+    result = 1;
+    for (i = n; i >= 1; i--)
+        result *= i;
+    return result;
     }
     
 function permutations(n)
@@ -85,15 +85,6 @@ function variations(n, r)
 function variations_with_repetition(n, r)
     {
     return Math.pow(n, r);
-    }
-
-// To be deleted if format_integer does not create any problem    
-function format_integer_old(integer)
-    {
-    if ((format != "integer" && integer > max_integer) || format == "exponential")
-        return integer.toExponential(EXPONENTIAL_DECIMALS);
-    else
-        return integer;
     }
     
 function format_integer(integer)
