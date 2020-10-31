@@ -1,159 +1,208 @@
 <!--
-	This file is part of Combinatoria.
+    This file is part of Combinatoria.
 
-	Combinatoria is free software: you can redistribute it and/or modify
-	it under the terms of the GNU Affero General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+    Combinatoria is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-	Combinatoria is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU Affero General Public License for more details.
+    Combinatoria is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    See the
+    GNU Affero General Public License for more details.
 
-	You should have received a copy of the GNU Affero General Public License
-	along with Combinatoria.  If not, see <https://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU Affero General Public License
+    along with Combinatoria.    If not, see <https://www.gnu.org/licenses/>.
 -->
 
 <!DOCTYPE html>
 <html>
 
 <head>
-<script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+
+window.onload=function() 
+    {
+    document.getElementById("calculate_button").addEventListener("click", update_values);
+    document.getElementById("n").addEventListener("change", update_values);
+    document.getElementById("r").addEventListener("change", update_values);
+    document.getElementById("select-format").addEventListener("change", function() 
+        {
+    	format = this.value; 
+    	update_values();
+        });
+    }
 
 // Default format
 var format = "auto";
-// Maximum number to be represented in integer format when format "auto" is selected
-const max_integer = 1000000;
-const exponential_decimals = 2;
+// Number of decimals for exponential format
+const EXPONENTIAL_DECIMALS = 2;
+// Highest number to be shown as integer with format "auto"
+const MAXINT = 1e21;
 
 function factorial(n)
-	{
-	if (n < 0)
-		return NaN;
-	if (n == 0)
-		return 1;
-	else
-		return n * factorial(n - 1);
-	}
-	
+    {
+    var error_message;
+    if (n < 0)
+        {
+        clean();
+        error_message = "Function factorial called with non-natural argument: " + n.toString();
+        alert(error_message);
+        throw new Error(error_message);
+        return NaN;
+        }
+    if (n == 0)
+        return 1;
+    else
+        return n * factorial(n - 1);
+    }
+    
 function permutations(n)
-	{
-	return factorial(n);
-	}
+    {
+    return factorial(n);
+    }
 
 function combinations(n, r)
-	{
-	if (n < r)
-		return NaN;
-	return Math.round(factorial(n) / (factorial(r) * factorial(n - r)));
-	}
-	
+    {
+    if (n < r)
+        return NaN;
+    return Math.round(factorial(n) / (factorial(r) * factorial(n - r)));
+    }
+    
 function combinations_with_repetition(n, r)
-	{
-	return Math.round(factorial(n + r - 1) / (factorial(r) * factorial (n - 1)));
-	}
+    {
+    return Math.round(factorial(n + r - 1) / (factorial(r) * factorial (n - 1)));
+    }
 
 function variations(n, r)
-	{
-	if (n < r)
-		return NaN;
-	return Math.round(factorial(n) / factorial(n - r));
-	}
-	
+    {
+    if (n < r)
+        return NaN;
+    return Math.round(factorial(n) / factorial(n - r));
+    }
+    
 function variations_with_repetition(n, r)
-	{
-	return Math.pow(n, r);
-	}
-	
+    {
+    return Math.pow(n, r);
+    }
+
+// To be deleted if format_integer does not create any problem    
+function format_integer_old(integer)
+    {
+    if ((format != "integer" && integer > max_integer) || format == "exponential")
+        return integer.toExponential(EXPONENTIAL_DECIMALS);
+    else
+        return integer;
+    }
+    
 function format_integer(integer)
-	{
-	if ((format != "integer" && integer > max_integer) || format == "exponential")
-		return integer.toExponential(exponential_decimals);
-	else
-		return integer;
-	}
+    {
+    var count, position, result, integer_string;
+    if (format == "exponential" || integer >= MAXINT)
+        result = integer.toExponential(EXPONENTIAL_DECIMALS).toString();
+    else
+        {
+        result = "";
+        integer_string = integer.toString();
+        for (count = 0, position = integer_string.length - 1; position >= 0; count++, position--) 
+            {
+            if (count != 0 && count % 3 == 0)
+                result = " " + result;
+            result = integer_string.charAt(position) + result;
+            }
+        }
+    return result;
+    }
+    
+function clean() 
+    {
+    var id_array = ["p", "c", "v", "cr", "vr"];
+    id_array.forEach(id => 
+        {
+        document.getElementById(id).innerHTML = "";
+        });
+    id_array = ["n", "r"];
+    id_array.forEach(id => 
+        {
+        document.getElementById(id).value = "";
+        });
+    }
 
 function update_values()
-	{
-	var value;
-	var n = Number(document.getElementById("n").value);
-	var r = Number(document.getElementById("r").value);
-	if (! Number.isInteger(n) || n < 1)
-		{
-		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
-		return;
-		}
-	if (! Number.isInteger(r) || r < 1)
-		{
-		alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
-		return;
-		}
-	// Permutations
-	value = permutations(n);
-	document.getElementById("p").innerHTML = format_integer(value);
-	// Combinations
-	value = combinations(n, r);
-	document.getElementById("c").innerHTML = format_integer(value);
-	// Combinations with repetition
-	value = combinations_with_repetition(n, r);
-	document.getElementById("cr").innerHTML = format_integer(value);
-	// Variations
-	value = variations(n, r);
-	document.getElementById("v").innerHTML = format_integer(value);
-	// Variations with repetition
-	value = variations_with_repetition(n, r);
-	document.getElementById("vr").innerHTML = format_integer(value);
-	}
+    {
+    var value;
+    var n = Number(document.getElementById("n").value);
+    var r = Number(document.getElementById("r").value);
+    if (! Number.isInteger(n) || n < 1 || ! Number.isInteger(r) || r < 1)
+        {
+        alert("ERROR: \"n\" and \"r\" must be integer and strictly positive");
+        clean();
+        return;
+        }
+    // Permutations
+    value = permutations(n);
+    document.getElementById("p").innerHTML = format_integer(value);
+    // Combinations
+    value = combinations(n, r);
+    document.getElementById("c").innerHTML = format_integer(value);
+    // Combinations with repetition
+    value = combinations_with_repetition(n, r);
+    document.getElementById("cr").innerHTML = format_integer(value);
+    // Variations
+    value = variations(n, r);
+    document.getElementById("v").innerHTML = format_integer(value);
+    // Variations with repetition
+    value = variations_with_repetition(n, r);
+    document.getElementById("vr").innerHTML = format_integer(value);
+    }
 
 
 </script>
-
 <link rel="stylesheet" type="text/css" href="style.css">
-
 </head>
-
-
 
 
 
 <body>
 
-<div id="input-form">
-	<form id="settings" autocomplete="off">
-		Output format:<br>
-		<select id="select-format" name="select-format" onchange="format = this.value; update_values()">
-			<option value="auto">Auto</option>
-			<option value="exponential">Exponential</option>
-			<option value="integer">Integer</option>	
-		</select>
-	</form>
-	<p id="n-text">n:</p>
-	<input type="text" name="n" id="n" value="1" onchange="update_values()"><br>
-	<p id="r-text">r:</p>
-	<input type="text" name="r" id="r" value="1" onchange="update_values()"><br>
-	<button onclick="update_values()">Calculate</button>
+<div id="banner">
+    <img id="banner-icon" src="banner-image.png" alt="Calculator icon">
+    <div id="banner-title">Combinatory calculator</div>
 </div>
 
+<form id="input-form" autocomplete="off">
+<label id="select-format-label" for="select-format">Output format:</label>
+<select id="select-format" name="select-format">
+    <option value="auto">Auto</option>
+    <option value="exponential">Exponential</option>
+</select>
+    <label for="n" id="n-label">n:</label>
+    <input type="text" name="n" id="n" value="1"><br>
+    <label for="r" id="r-label">r:</label>
+    <input type="text" name="r" id="r" value="1"><br>
+    <input type="button" id="calculate_button" value="Calculate">
+</form>
+
 <table id="output-table">
-	<tr>
-	<th></th>
-	<th>Combinations</th>
-	<th>Variations</th>
-	<th>Permutations</th>
-	</tr>
-	<tr>
-	<th>With repetition</th>
-	<td id="cr"></td>
-	<!--<td id="cr" onmouseover="this.style.background='#ccc';" onmouseout="this.style.background='white';">1</td>-->
-	<td id="vr"></td>
-	<td rowspan=2 id="p"></td>
-	</tr>
-	<tr>
-	<th>Without repetition</th>
-	<td id="c"></td>
-	<td id="v"></td>
-	</tr>	
+    <tr>
+    <th></th>
+    <th>Combinations</th>
+    <th>Variations</th>
+    <th>Permutations</th>
+    </tr>
+    <tr>
+    <th>With repetition</th>
+    <td id="cr"></td>
+    <!--<td id="cr" onmouseover="this.style.background='#ccc';" onmouseout="this.style.background='white';">1</td>-->
+    <td id="vr"></td>
+    <td rowspan=2 id="p"></td>
+    </tr>
+    <tr>
+    <th>Without repetition</th>
+    <td id="c"></td>
+    <td id="v"></td>
+    </tr>    
 </table>
 
 
