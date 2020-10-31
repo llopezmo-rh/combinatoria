@@ -36,7 +36,10 @@ window.onload=function()
 
 // Default format
 var format = "auto";
-const exponential_decimals = 2;
+// Number of decimals for exponential format
+const EXPONENTIAL_DECIMALS = 2;
+// Highest number to be shown as integer with format "auto"
+const MAXINT = 1e21;
 
 function factorial(n)
     {
@@ -88,7 +91,7 @@ function variations_with_repetition(n, r)
 function format_integer_old(integer)
     {
     if ((format != "integer" && integer > max_integer) || format == "exponential")
-        return integer.toExponential(exponential_decimals);
+        return integer.toExponential(EXPONENTIAL_DECIMALS);
     else
         return integer;
     }
@@ -96,8 +99,8 @@ function format_integer_old(integer)
 function format_integer(integer)
     {
     var count, position, result, integer_string;
-    if (format == "exponential" || integer >= 1e21)
-        result = integer.toExponential(exponential_decimals).toString();
+    if (format == "exponential" || integer >= MAXINT)
+        result = integer.toExponential(EXPONENTIAL_DECIMALS).toString();
     else
         {
         result = "";
