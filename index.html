@@ -25,8 +25,9 @@
 window.onload=function() 
     {
     document.getElementById("calculate_button").addEventListener("click", update_values);
-    document.getElementById("n").addEventListener("change", update_values);
-    document.getElementById("r").addEventListener("change", update_values);
+    // Lines below commented out to prevent alert messages about wrong values
+    //document.getElementById("n").addEventListener("change", update_values);
+    //document.getElementById("r").addEventListener("change", update_values);
     document.getElementById("select-format").addEventListener("change", function() 
         {
     	format = this.value; 
